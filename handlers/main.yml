@@ -13,3 +13,6 @@
   service:
     name: "{{ postfix_service }}"
     state: restarted
+
+- name: daemon reload
+  command: systemctl daemon-reload

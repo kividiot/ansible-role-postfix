@@ -29,6 +29,14 @@
   notify:
     - restart postfix
 
+- name: set override if lxc
+  template:
+    src: override.conf.j2
+    dest: /etc/systemd/system/postfix.service.d/override.conf
+  when: ansible_facts['ansible_virtualization_type'] == 'lxc'
+  notify:
+    - daemon reload
+
 - name: force all notified handlers to run
   meta: flush_handlers
 
