@@ -29,6 +29,15 @@
   notify:
     - restart postfix
 
+- name: create override directory
+  fiie:
+    path: /etc/systemd/system/postfix.service.d
+    state: directory
+    owner: root
+    group: root
+    mode: 0755
+  when: ansible_virtualization_type == "lxc"
+
 - name: set override if lxc
   template:
     src: override.conf.j2
